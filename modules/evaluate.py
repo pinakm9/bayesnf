@@ -15,7 +15,7 @@ def evaluate(model, test_path, length):
     files = get_files(test_path)
     y = np.zeros((len(files), length))
     for file, index in files:
-        data = pd.read_csv(file)[:length, :]
+        data = pd.read_csv(file).iloc[:length, :]
         yhat, _ = model.predict(data,  quantiles=(0.025, 0.5, 0.975))
         y[index] = yhat[0].mean(axis=0)
     return y 
